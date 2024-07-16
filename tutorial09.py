@@ -8,10 +8,10 @@ from nlScript.ui.ui import ACEditor
 from preprocessing import Preprocessing
 
 """
- * This tutorial extends the previous functionality by median filtering, background subtraction and intensity
- * normalization, simply by adding more sentence definitions similar to the existing one for Gaussian blurring.
- *
- * The new sentences also re-use the 'filter-size' type.
+This tutorial extends the previous functionality by median filtering, background subtraction and intensity
+normalization, simply by adding more sentence definitions similar to the existing one for Gaussian blurring.
+
+The new sentences also re-use the 'filter-size' type.
 """
 
 if __name__ == '__main__':
