@@ -1,4 +1,4 @@
-from PyQt5.QtWidgets import QApplication
+from PySide2.QtWidgets import QApplication
 from nlScript.autocompleter import Autocompleter
 from nlScript.core.autocompletion import Autocompletion
 from nlScript.ebnf.ebnfparser import ParseStartListener
@@ -32,7 +32,7 @@ https://nlScript.github.io/nlScript-java/#dynamically-re-defining-types
 """
 
 if __name__ == '__main__':
-    # Needed for running a PyQt application
+    # Needed for running a PySide application
     app = QApplication([])
 
     preprocessing = Preprocessing(None)
@@ -85,5 +85,5 @@ if __name__ == '__main__':
     editor = ACEditor(parser)
     editor.show()
 
-    # Needed for running a PyQt application
+    # Needed for running a PySide application
     exit(app.exec_())

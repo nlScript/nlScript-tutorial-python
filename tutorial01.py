@@ -1,4 +1,4 @@
-from PyQt5.QtWidgets import QApplication
+from PySide2.QtWidgets import QApplication
 
 from nlScript.parser import Parser
 from nlScript.ui.ui import ACEditor
@@ -20,7 +20,7 @@ https://nlScript.github.io/nlScript-java/variables.html
 """
 
 if __name__ == '__main__':
-    # Needed for running a PyQt application
+    # Needed for running a PySide application
     app = QApplication([])
 
     # Step 1: Create a parser
@@ -45,5 +45,5 @@ if __name__ == '__main__':
     editor = ACEditor(parser)
     editor.show()
 
-    # Needed for running a PyQt application
+    # Needed for running a PySide application
     exit(app.exec_())

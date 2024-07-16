@@ -26,6 +26,7 @@ class Preprocessing:
     def update(self):
         self._ax.imshow(self._img)
         plt.draw()
+        self._fig.canvas.draw()
 
     def setImage(self, img):
         self._img = img

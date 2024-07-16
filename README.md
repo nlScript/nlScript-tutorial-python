@@ -18,7 +18,7 @@ nlScript is also available in other languages, see https://github.com/nlScript
 
 - Install the dependencies:
   ```bash
-  python -m pip install --upgrade PyQt5 requests pillow matplotlib nlScript
+  python -m pip install --upgrade PySide2 requests pillow matplotlib nlScript
   ```
 
 - Run the individual tutorial files, e.g.

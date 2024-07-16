@@ -1,4 +1,4 @@
-from PyQt5.QtWidgets import QApplication
+from PySide2.QtWidgets import QApplication
 from nlScript.evaluator import Evaluator
 
 from nlScript.parser import Parser

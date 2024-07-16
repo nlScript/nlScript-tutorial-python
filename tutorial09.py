@@ -1,4 +1,4 @@
-from PyQt5.QtWidgets import QApplication
+from PySide2.QtWidgets import QApplication
 from nlScript.ebnf.ebnfparser import ParseStartListener
 from nlScript.evaluator import Evaluator
 
@@ -15,7 +15,7 @@ The new sentences also re-use the 'filter-size' type.
 """
 
 if __name__ == '__main__':
-    # Needed for running a PyQt application
+    # Needed for running a PySide application
     app = QApplication([])
 
     preprocessing = Preprocessing(None)
@@ -77,5 +77,5 @@ if __name__ == '__main__':
     editor = ACEditor(parser)
     editor.show()
 
-    # Needed for running a PyQt application
+    # Needed for running a PySide application
     exit(app.exec_())
