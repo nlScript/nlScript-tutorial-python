@@ -26,4 +26,24 @@ nlScript is also available in other languages, see https://github.com/nlScript
   python tutorial01.py
   ```
 
+## License
+
+This project is licensed under the GPL-3.0 License - see the [LICENSE.txt](LICENSE.txt) file for details.
+
+nlScript-tutorial-python depends on the following libraries, which are
+licensed as follows:
+
+- PySide2
+  License: LGPL
+  URL: https://pypi.org/project/PySide2/
+
+- requests
+  License: Apache 2.0
+  URL: https://pypi.org/project/requests/
+  Copyright by Kenneth Reitz
+
+- pillow
+  License: Historical Permission Notice and Disclaimer (HPND)
+  URL: https://pypi.org/project/pillow/
+  Copyright by Jeffrey A. Clark and contributors
 
