@@ -1,6 +1,5 @@
 from PySide2.QtWidgets import QApplication
 from nlScript.ebnf.ebnfparser import ParseStartListener
-from nlScript.evaluator import Evaluator
 
 from nlScript.parser import Parser
 from nlScript.ui.ui import ACEditor
@@ -31,13 +30,13 @@ if __name__ == '__main__':
 
         parser.undefineType("units")
 
-        parser.defineType("units", "pixel(s)", Evaluator(lambda pn: False))
-        parser.defineType("units", unitsString, Evaluator(lambda pn: True))
+        parser.defineType("units", "pixel(s)", lambda pn: False)
+        parser.defineType("units", unitsString, lambda pn: True)
 
 
     parser.addParseStartListener(listener=ParseStartListener(parsingStarted))
 
-    parser.defineType("units", "pixel(s)", Evaluator(lambda pn: False))
+    parser.defineType("units", "pixel(s)", lambda pn: False)
         
     def evaluateFilterSize(pn):
         stddev = pn.evaluate("stddev")
@@ -50,29 +49,29 @@ if __name__ == '__main__':
     parser.defineType(
         "filter-size",
         "{stddev:float} {units:units}",
-        evaluator=Evaluator(evaluateFilterSize),
+        evaluator=evaluateFilterSize,
         autocompleter=True
     )
 
     # Gaussian Blurring
     parser.defineSentence(
         "Apply Gaussian blurring with a standard deviation of {stddev:filter-size}.",
-        evaluator=Evaluator(lambda pn: preprocessing.gaussianBlur(pn.evaluate("stddev"))))
+        evaluator=lambda pn: preprocessing.gaussianBlur(pn.evaluate("stddev")))
 
     # Median filtering
     parser.defineSentence(
         "Apply Median filtering with a window of radius {window-size:filter-size}.",
-        evaluator=Evaluator(lambda pn: preprocessing.medianFilter(pn.evaluate("window-size"))))
+        evaluator=lambda pn: preprocessing.medianFilter(pn.evaluate("window-size")))
 
     # Intensity normalization
     parser.defineSentence(
         "Normalize intensities.",
-        evaluator=Evaluator(lambda pn: preprocessing.intensityNormalization()))
+        evaluator=lambda pn: preprocessing.intensityNormalization())
 
     # Background subtraction
     parser.defineSentence(
         "Subtract the background with a standard deviation of {window-size:filter-size}.",
-        evaluator=Evaluator(lambda pn: preprocessing.gaussianBlur(pn.evaluate("window-size"))))
+        evaluator=lambda pn: preprocessing.gaussianBlur(pn.evaluate("window-size")))
 
     editor = ACEditor(parser)
     editor.show()

@@ -1,8 +1,6 @@
 from PySide2.QtWidgets import QApplication
-from nlScript.autocompleter import Autocompleter
 from nlScript.core.autocompletion import Autocompletion, Purpose
 from nlScript.ebnf.ebnfparser import ParseStartListener
-from nlScript.evaluator import Evaluator
 from nlScript.parseexception import ParseException
 
 from nlScript.parser import Parser
@@ -43,7 +41,7 @@ if __name__ == '__main__':
     # pixel calibration unit string can be stored, to be used for autocompletion later.
     # Note: Parsing is not only performed once the user clicks on 'Run', but whenever the user's
     # text changes, for auto-completion.
-    imageUnits = "xxx"
+    imageUnits = ""
 
     def parsingStarted():
         global imageUnits
@@ -57,8 +55,8 @@ if __name__ == '__main__':
         return Autocompletion.literal(pn, ["pixel(s)", imageUnits])
 
     parser.defineType("units", "{unitstring:[a-zA-Z()]:+}",
-                      evaluator=Evaluator(lambda pn: pn.getParsedString() != "pixel(s)"),
-                      autocompleter=Autocompleter(getAutocompletion))
+                      evaluator=lambda pn: pn.getParsedString() != "pixel(s)",
+                      autocompleter=getAutocompletion)
 
 
     def evaluateFilterSize(pn):
@@ -70,7 +68,7 @@ if __name__ == '__main__':
 
     parser.defineType("filter-size",
                       "{stddev:float} {units:units}",
-                      evaluator=Evaluator(evaluateFilterSize),
+                      evaluator=evaluateFilterSize,
                       autocompleter=True)
 
     def evaluateSentence(pn):
@@ -79,7 +77,7 @@ if __name__ == '__main__':
 
     parser.defineSentence(
         "Apply Gaussian blurring with a standard deviation of {stddev:filter-size}.",
-        evaluator=Evaluator(evaluateSentence))
+        evaluator=evaluateSentence)
 
     editor = ACEditor(parser)
     editor.show()

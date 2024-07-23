@@ -1,8 +1,6 @@
 from PySide2.QtWidgets import QApplication
-from nlScript.autocompleter import Autocompleter
 from nlScript.core.autocompletion import Autocompletion
 from nlScript.ebnf.ebnfparser import ParseStartListener
-from nlScript.evaluator import Evaluator
 
 from nlScript.parser import Parser
 from nlScript.ui.ui import ACEditor
@@ -61,8 +59,8 @@ if __name__ == '__main__':
         return Autocompletion.veto(pn)
 
     parser.defineType("units", "{unistring:[a-zA-Z()]:+}",
-              evaluator=Evaluator(lambda pn: pn.getParsedString() != "pixel(s)"),
-              autocompleter=Autocompleter(getAutocompletion))
+              evaluator=lambda pn: pn.getParsedString() != "pixel(s)",
+              autocompleter=getAutocompletion)
 
     def evaluateFilterSize(pn):
         stddev = pn.evaluate("stddev")
@@ -75,7 +73,7 @@ if __name__ == '__main__':
     parser.defineType(
         "filter-size",
         "{stddev:float} {units:units}",
-        evaluator=Evaluator(evaluateFilterSize),
+        evaluator=evaluateFilterSize,
         autocompleter=True
     )
 
@@ -85,7 +83,7 @@ if __name__ == '__main__':
 
     parser.defineSentence(
         "Apply Gaussian blurring with a standard deviation of {stddev:filter-size}.",
-        evaluator=Evaluator(evaluateSentence))
+        evaluator=evaluateSentence)
 
     editor = ACEditor(parser)
     editor.show()

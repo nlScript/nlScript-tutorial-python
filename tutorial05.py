@@ -1,5 +1,4 @@
 from PySide2.QtWidgets import QApplication
-from nlScript.evaluator import Evaluator
 
 from nlScript.parser import Parser
 from nlScript.ui.ui import ACEditor
@@ -26,9 +25,9 @@ if __name__ == '__main__':
 
     # 1. Define the type "units" as the string literal "pixel(s)"
     #    Here we use a lambda expression to define the evaluator
-    parser.defineType("units", "pixel(s)", evaluator=Evaluator(lambda pn: False))
+    parser.defineType("units", "pixel(s)", evaluator=lambda pn: False)
     # 2. Define the type "units" as the string literal "calibrated units"
-    parser.defineType("units", "calibration units", evaluator=Evaluator(lambda pn: True))
+    parser.defineType("units", "calibration units", evaluator=lambda pn: True)
 
 
     def evaluateFilterSize(pn):
@@ -47,7 +46,7 @@ if __name__ == '__main__':
     parser.defineType(
         "filter-size",
         "{stddev:float} {units:units}",
-        evaluator=Evaluator(evaluateFilterSize),
+        evaluator=evaluateFilterSize,
         autocompleter=True
     )
 
@@ -57,7 +56,7 @@ if __name__ == '__main__':
 
     parser.defineSentence(
         "Apply Gaussian blurring with a standard deviation of {stddev:filter-size}.",
-        evaluator=Evaluator(evaluateSentence))
+        evaluator=evaluateSentence)
 
     editor = ACEditor(parser)
     editor.show()
