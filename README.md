@@ -16,9 +16,14 @@ nlScript is also available in other languages, see https://github.com/orgs/nlScr
   python -m venv env
   ```
 
+- If you created a virtual environment, activate it. On Windows, using Git Bash, e.g.
+  ```bash
+  source env/Scripts/activate
+  ```
+
 - Install the dependencies:
   ```bash
-  python -m pip install --upgrade PySide2 requests pillow matplotlib nlScript
+  python -m pip install --upgrade requests pillow matplotlib nlScript
   ```
 
 - Run the individual tutorial files, e.g.
